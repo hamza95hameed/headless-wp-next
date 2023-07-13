@@ -7,15 +7,18 @@ import HandPicked from './components/HandPicked/HandPicked'
 import StoriesPost from './components/StoriesPost/StoriesPost'
 import Newsletter from './components/Newsletter/Newsletter'
 
-export default function Home() {
+export default async function Home() {
+  const res   = await fetch('http://localhost:3000/api/posts');
+  const posts = await res.json();
+  
   return (
     <main>
       <Banner></Banner>
-      <Trending></Trending>
+      <Trending posts={posts}></Trending>
       <EditorChoice></EditorChoice>
       <Advertisement></Advertisement>
       <VideoPost></VideoPost>
-      <HandPicked></HandPicked>
+      <HandPicked posts={posts}></HandPicked>
       <StoriesPost></StoriesPost>
       <Newsletter></Newsletter>
     </main>
