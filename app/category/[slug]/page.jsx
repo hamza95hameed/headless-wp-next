@@ -1,14 +1,14 @@
 import Link from 'next/link'
 import Breadcrumb from '@/app/components/Breadcrumb/Breadcrumb'
-import { getThumbnail, getCategory, getAuthor, slugify, formatDate } from '@/utils/common';
+import { getThumbnail, getCategory, getAuthor, formatDate } from '@/utils/common';
 import Sidebar from '@/app/components/Sidebar/Sidebar';
 
 export default async function Page({ params }) {
-    const resCategories = await fetch('http://localhost:3000/api/categories');
-	const categories    = await resCategories.json();
-    const cat           = categories.find((category) => category.slug === params.slug)
-    const resPosts      = await fetch(`http://localhost:3000/api/posts?slug=${cat.id}&type=categories`);
-	const posts         = await resPosts.json();
+    let categories = await fetch('http://localhost:3000/api/categories');
+	categories     = await categories.json();
+    let cat        = categories.find((category) => category.slug === params.slug)
+    let posts      = await fetch(`http://localhost:3000/api/posts?slug=${cat.id}&type=categories`);
+	posts          = await posts.json();
 
     return (
         <>
@@ -32,12 +32,12 @@ export default async function Page({ params }) {
                                 {posts.map((post) => (
                                     <div className="latest__post-item" key={post.id}>
                                         <div className="latest__post-thumb tgImage__hover">
-                                            <Link href={`/blog/${post.slug}`}><img src={getThumbnail(post)} width="100%" height="auto" alt="img" /></Link>
+                                            <Link href={`/blog/${post.slug}`}><img src={getThumbnail(post)} width="100%" alt="img" /></Link>
                                         </div>
                                         <div className="latest__post-content">
                                             <ul className="tgbanner__content-meta list-wrap">
-                                                <li className="category"><Link href={`/category/${slugify(post)}`}>{getCategory(post)}</Link></li>
-                                                <li><span className="by">By</span> <Link href="blog.html">{getAuthor(post)}</Link></li>
+                                                <li className="category"><Link href={`/category/${getCategory(post).slug}`}>{getCategory(post).name}</Link></li>
+                                                <li><span className="by">By</span> <Link href={`/author/${getAuthor(post).slug}`}>{getAuthor(post).name}</Link></li>
                                                 <li>{formatDate(post.date)}</li>
                                             </ul>
                                             <h3 className="title tgcommon__hover">

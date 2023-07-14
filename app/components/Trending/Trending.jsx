@@ -3,7 +3,7 @@ import React from 'react'
 import Link from 'next/link'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
-import { getThumbnail, getCategory, getAuthor, slugify } from '@/utils/common';
+import { getThumbnail, getCategory, getAuthor } from '@/utils/common';
 import 'swiper/css';
 
 const Trending = ({ posts }) => {
@@ -64,8 +64,8 @@ const Trending = ({ posts }) => {
                                                 </div>
                                                 <div className="trending__post-content">
                                                     <ul className="tgbanner__content-meta list-wrap">
-                                                        <li className="category"><Link href={`/category/${slugify(post)}`}>{getCategory(post)}</Link></li>
-                                                        <li><span className="by">By</span> <Link href="/blog">{getAuthor(post)}</Link></li>
+                                                        <li className="category"><Link href={`/category/${getCategory(post).slug}`}>{getCategory(post).name}</Link></li>
+                                                        <li><span className="by">By</span> <Link href={`/author/${getAuthor(post).slug}`}>{getAuthor(post).name}</Link></li>
                                                     </ul>
                                                     <h4 className="title tgcommon__hover">
                                                         <Link href={`/blog/${post.slug}`} dangerouslySetInnerHTML={{ __html: post.title.rendered }}></Link>

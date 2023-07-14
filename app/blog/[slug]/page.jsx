@@ -1,17 +1,17 @@
 import Breadcrumb from "@/app/components/Breadcrumb/Breadcrumb"
 import Link from 'next/link'
-import { getThumbnail, getCategory, getAuthor, slugify, formatDate } from '@/utils/common';
+import { getThumbnail, getCategory, getAuthor, formatDate } from '@/utils/common';
 import Sidebar from '@/app/components/Sidebar/Sidebar'
 
 export default async function Page({ params }) {
-	const resPosts      = await fetch('http://localhost:3000/api/posts');
-	const posts 	    = await resPosts.json();
-	const _post 	    = posts.find(post => post.slug === params.slug)
-	const resCategories = await fetch('http://localhost:3000/api/categories');
-	const categories    = await resCategories.json();
+	let post       = await fetch(`http://localhost:3000/api/posts?slug=${params.slug}&type=slug`);
+	post 	       = await post.json();
+	post 	       = post[0];
+	let categories = await fetch('http://localhost:3000/api/categories');
+	categories     = await categories.json();
 	return (
 		<>
-			<Breadcrumb type={'blog'} name={_post.title.rendered}></Breadcrumb>
+			<Breadcrumb type={'blog'} name={post.title.rendered}></Breadcrumb>
 			<section className="blog-details-area pt-80 pb-100">
 				<div className="container">
 					<div className="row justify-content-center">
@@ -29,16 +29,16 @@ export default async function Page({ params }) {
 						<div className="col-xl-8 col-lg-7">
 							<div className="blog-details-wrap">
 								<ul className="tgbanner__content-meta list-wrap">
-									<li className="category"><Link href={`/category/${slugify(getCategory(_post))}`}>{getCategory(_post)}</Link></li>
-									<li><span className="by">By</span> <Link href="blog.html">{getAuthor(_post)}</Link></li>
-									<li>{formatDate(_post.date)}</li>
+									<li className="category"><Link href={`/category/${getCategory(post).slug}`}>{getCategory(post).name}</Link></li>
+									<li><span className="by">By</span> <Link href={`/author/${getAuthor(post).slug}`}>{getAuthor(post).name}</Link></li>
+									<li>{formatDate(post.date)}</li>
 									<li>23 comments</li>
 								</ul>
-								<h2 className="title" dangerouslySetInnerHTML={{ __html: _post.title.rendered }}></h2>
+								<h2 className="title" dangerouslySetInnerHTML={{ __html: post.title.rendered }}></h2>
 								<div className="blog-details-thumb">
-									<img src={getThumbnail(_post)} alt="" />
+									<img src={getThumbnail(post)} alt="" />
 								</div>
-								<div className="blog-details-content" dangerouslySetInnerHTML={{ __html: _post.content.rendered }}>
+								<div className="blog-details-content" dangerouslySetInnerHTML={{ __html: post.content.rendered }}>
 									
 								</div>
 								<div className="blog-details-bottom">
@@ -46,9 +46,9 @@ export default async function Page({ params }) {
 										<div className="col-xl-6 col-md-7">
 											<div className="blog-details-tags">
 												<ul className="list-wrap mb-0">
-													{categories.filter((category) => _post.categories.includes(category.id)).map((category) => (
+													{categories.filter((category) => post.categories.includes(category.id)).map((category) => (
 														<li key={category.id}>
-															<Link href={`/category/${slugify(category.name)}`}>{category.name}</Link>
+															<Link href={`/category/${category.slug}`}>{category.name}</Link>
 														</li>
 													))}						
 												</ul>
@@ -108,7 +108,7 @@ export default async function Page({ params }) {
 							</div>
 						</div>
 						<div className="col-xl-3 col-lg-4 col-md-6">
-							<Sidebar post={_post} categories={categories}></Sidebar>
+							<Sidebar post={post} categories={categories}></Sidebar>
 						</div>
 					</div>
 				</div>

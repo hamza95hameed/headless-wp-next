@@ -1,7 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
+import { formatDate, getCategory, getThumbnail, getAuthor } from '@/utils/common'
 
-const VideoPost = () => {
+const VideoPost = ({posts}) => {
   return (
     <section className="video-post-area section__hover-line white-bg pt-75 pb-80">
         <div className="container">
@@ -24,69 +25,35 @@ const VideoPost = () => {
                 <div className="col-xl-8 col-lg-7">
                     <div className="video__post-item big-post">
                         <div className="video__post-thumb">
-                            <Link href="blog-details.html"><img src="/img/blog/blog14.jpg" alt="img" /></Link>
-                            <Link href="https://www.youtube.com/watch?v=FT3ODSg1GFE" className="popup-video"><i className="fas fa-play"></i></Link>
+                            <Link href={`/blog/${posts[0].slug}`}><img src={getThumbnail(posts[0])} alt="img" /></Link>
                         </div>
                         <div className="video__post-content">
                             <ul className="tgbanner__content-meta list-wrap">
-                                <li className="category"><Link href="blog.html">technology</Link></li>
-                                <li><span className="by">By</span> <Link href="blog.html">alonso d.</Link></li>
-                                <li>nov 21, 2022</li>
+                                <li className="category"><Link href={`/category/${getCategory(posts[0]).slug}`}>{getCategory(posts[0]).name}</Link></li>
+                                <li><span className="by">By</span> <Link href={`/author/${getAuthor(posts[0]).slug}`}>{getAuthor(posts[0]).name}</Link></li>
+                                <li>{formatDate(posts[0].date)}</li>
                             </ul>
-                            <h3 className="title tgcommon__hover"><Link href="blog-details.html">The multiverse is a hypothetical group of multiple universes.</Link></h3>
+                            <h3 className="title tgcommon__hover"><Link href={`/blog/${posts[0].slug}`}dangerouslySetInnerHTML={{ __html: posts[0].title.rendered }}></Link></h3>
                         </div>
                     </div>
                 </div>
                 <div className="col-xl-4 col-lg-5">
-                    <div className="video__post-item side-post">
-                        <div className="video__post-thumb tgImage__hover">
-                            <Link href="https://www.youtube.com/watch?v=FT3ODSg1GFE" className="popup-video"><img src="/img/blog/blog15.jpg" alt="img" /><i className="fas fa-play"></i></Link>
+                    {posts.slice(1,5).map(post => (
+                        <div className="video__post-item side-post">
+                            <div className="video__post-thumb tgImage__hover">
+                                <Link href={`/blog/${post.slug}`} className="popup-video"><img src={getThumbnail(post)} alt="img" /></Link>
+                            </div>
+                            <div className="video__post-content">
+                                <ul className="tgbanner__content-meta list-wrap">
+                                    <li className="category"><Link href={`/category/${getCategory(post).slug}`}>{getCategory(post).name}</Link></li>
+                                    <li><span className="by">By</span> <Link href={`/author/${getAuthor(post).slug}`}>{getAuthor(post).name}</Link></li>
+                                </ul>
+                                <h3 className="title tgcommon__hover">
+                                    <Link href={`/blog/${post.slug}`}dangerouslySetInnerHTML={{ __html: post.title.rendered }}></Link>
+                                </h3>
+                            </div>
                         </div>
-                        <div className="video__post-content">
-                            <ul className="tgbanner__content-meta list-wrap">
-                                <li className="category"><Link href="blog.html">medical</Link></li>
-                                <li><span className="by">By</span> <Link href="blog.html">alonso d.</Link></li>
-                            </ul>
-                            <h3 className="title tgcommon__hover"><Link href="blog-details.html">Stanford physicists Andrei
-                            Linde In a new study</Link></h3>
-                        </div>
-                    </div>
-                    <div className="video__post-item side-post">
-                        <div className="video__post-thumb tgImage__hover">
-                            <Link href="https://www.youtube.com/watch?v=FT3ODSg1GFE" className="popup-video"><img src="/img/blog/blog16.jpg" alt="img" /><i className="fas fa-play"></i></Link>
-                        </div>
-                        <div className="video__post-content">
-                            <ul className="tgbanner__content-meta list-wrap">
-                                <li className="category"><Link href="blog.html">medical</Link></li>
-                                <li><span className="by">By</span> <Link href="blog.html">alonso d.</Link></li>
-                            </ul>
-                            <h3 className="title tgcommon__hover"><Link href="blog-details.html">Accessible to telescopes, is about 90 billion years</Link></h3>
-                        </div>
-                    </div>
-                    <div className="video__post-item side-post">
-                        <div className="video__post-thumb tgImage__hover">
-                            <Link href="https://www.youtube.com/watch?v=FT3ODSg1GFE" className="popup-video"><img src="/img/blog/blog17.jpg" alt="img" /><i className="fas fa-play"></i></Link>
-                        </div>
-                        <div className="video__post-content">
-                            <ul className="tgbanner__content-meta list-wrap">
-                                <li className="category"><Link href="blog.html">medical</Link></li>
-                                <li><span className="by">By</span> <Link href="blog.html">alonso d.</Link></li>
-                            </ul>
-                            <h3 className="title tgcommon__hover"><Link href="blog-details.html">Observable universes each of which would comprise</Link></h3>
-                        </div>
-                    </div>
-                    <div className="video__post-item side-post">
-                        <div className="video__post-thumb tgImage__hover">
-                            <Link href="https://www.youtube.com/watch?v=FT3ODSg1GFE" className="popup-video"><img src="/img/blog/blog18.jpg" alt="img" /><i className="fas fa-play"></i></Link>
-                        </div>
-                        <div className="video__post-content">
-                            <ul className="tgbanner__content-meta list-wrap">
-                                <li className="category"><Link href="blog.html">medical</Link></li>
-                                <li><span className="by">By</span> <Link href="blog.html">alonso d.</Link></li>
-                            </ul>
-                            <h3 className="title tgcommon__hover"><Link href="blog-details.html">Experimentally accessible by a connected community</Link></h3>
-                        </div>
-                    </div>
+                    ))}
                 </div>
             </div>
         </div>

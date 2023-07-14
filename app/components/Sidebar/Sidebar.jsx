@@ -1,5 +1,5 @@
 import React from 'react'
-import { getThumbnail, getCategory, getAuthor, getAuthorImage } from '@/utils/common';
+import { getAuthor, getAuthorImage } from '@/utils/common';
 import Link from 'next/link'
 
 const Sidebar = ({post, categories}) => {
@@ -12,7 +12,7 @@ const Sidebar = ({post, categories}) => {
                         <img src={getAuthorImage(post)} alt="me" />
                     </div>
                     <div className="tgAbout-info">
-                        <p className="intro">Hi there, I’m <span>{getAuthor(post)}.</span></p>
+                        <p className="intro">Hi there, I’m <span>{getAuthor(post).name}.</span></p>
                         <span className="designation">Content Writer</span>
                     </div>
                     <div className="tgAbout-social">

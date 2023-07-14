@@ -5,7 +5,7 @@ export function getThumbnail(post){
 }
 export function getCategory(post){
     if (post._embedded['wp:term']) {
-        return post._embedded['wp:term'][0][0].name
+        return post._embedded['wp:term'][0][0]
     }
 }
 export function getTags(post){
@@ -14,8 +14,8 @@ export function getTags(post){
     }
 }
 export function getAuthor(post){
-    if (post._embedded['author'][0].name) {
-        return post._embedded['author'][0].name
+    if (post._embedded['author'][0]) {
+        return post._embedded['author'][0]
     }
 }
 export function getAuthorImage(post) {
@@ -37,14 +37,3 @@ export function formatDate(dateString) {
     const formattedDate = `${month} ${day}, ${year}`;
     return formattedDate;
 }
-
-export function slugify(str) {
-    return String(str)
-      .normalize('NFKD') // split accented characters into their base characters and diacritical marks
-      .replace(/[\u0300-\u036f]/g, '') // remove all the accents, which happen to be all in the \u03xx UNICODE block.
-      .trim() // trim leading or trailing whitespace
-      .toLowerCase() // convert to lowercase
-      .replace(/[^a-z0-9 -]/g, '') // remove non-alphanumeric characters
-      .replace(/\s+/g, '-') // replace spaces with hyphens
-      .replace(/-+/g, '-'); // remove consecutive hyphens
-  }

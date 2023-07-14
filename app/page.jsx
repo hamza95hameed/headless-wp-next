@@ -8,18 +8,26 @@ import StoriesPost from './components/StoriesPost/StoriesPost'
 import Newsletter from './components/Newsletter/Newsletter'
 
 export default async function Home() {
-  const res   = await fetch('http://localhost:3000/api/posts');
-  const posts = await res.json();
-  
+  let categories = await fetch('http://localhost:3000/api/categories');
+  categories     = await categories.json();
+
+  const posts = [];
+  const bannerPosts = [];
+  for (const category of categories) {
+    let categoryPosts = await fetch(`http://localhost:3000/api/posts?slug=${category.id}&type=categories`);
+	  categoryPosts     = await categoryPosts.json();
+    posts[category.name] = categoryPosts
+    bannerPosts.push(...categoryPosts);
+  }
   return (
     <main>
-      <Banner></Banner>
-      <Trending posts={posts}></Trending>
-      <EditorChoice></EditorChoice>
+      <Banner posts={bannerPosts}></Banner>
+      <Trending posts={posts['Sports']}></Trending>
+      <EditorChoice categories={categories}></EditorChoice>
       <Advertisement></Advertisement>
-      <VideoPost></VideoPost>
-      <HandPicked posts={posts}></HandPicked>
-      <StoriesPost></StoriesPost>
+      <VideoPost posts={posts['Games']}></VideoPost>
+      <HandPicked posts={posts['Travel']}></HandPicked>
+      <StoriesPost posts={posts['Entertainment']}></StoriesPost>
       <Newsletter></Newsletter>
     </main>
   )
