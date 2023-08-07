@@ -8,13 +8,13 @@ import StoriesPost from './components/StoriesPost/StoriesPost'
 import Newsletter from './components/Newsletter/Newsletter'
 
 export default async function Home() {
-  let categories = await fetch('http://localhost:3000/api/categories');
+  let categories = await fetch('http://localhost:3000/api/categories',{ cache:'no-store'});
   categories     = await categories.json();
 
   const posts = [];
   const bannerPosts = [];
   for (const category of categories) {
-    let categoryPosts = await fetch(`http://localhost:3000/api/posts?slug=${category.id}&type=categories`);
+    let categoryPosts = await fetch(`http://localhost:3000/api/posts?slug=${category.id}&type=categories`,{ cache:'no-store'});
 	  categoryPosts     = await categoryPosts.json();
     posts[category.name] = categoryPosts
     bannerPosts.push(...categoryPosts);

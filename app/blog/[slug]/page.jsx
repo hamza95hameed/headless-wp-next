@@ -1,4 +1,5 @@
 import Breadcrumb from "@/app/components/Breadcrumb/Breadcrumb"
+import {SocialShare} from "@/app/components/SocialShare/SocialShare";
 import Link from 'next/link'
 import { getThumbnail, getCategory, getAuthor, formatDate } from '@/utils/common';
 import Sidebar from '@/app/components/Sidebar/Sidebar'
@@ -16,15 +17,7 @@ export default async function Page({ params }) {
 				<div className="container">
 					<div className="row justify-content-center">
 						<div className="col-lg-1">
-							<div className="blog-details-social">
-								<ul className="list-wrap">
-									<li><Link href="#"><i className="fab fa-facebook-f"></i></Link></li>
-									<li><Link href="#"><i className="fab fa-twitter"></i></Link></li>
-									<li><Link href="#"><i className="fab fa-linkedin-in"></i></Link></li>
-									<li><Link href="#"><i className="fab fa-behance"></i></Link></li>
-									<li><Link href="#"><i className="fas fa-share"></i></Link></li>
-								</ul>
-							</div>
+						<SocialShare post={post} type={'vertical'} />
 						</div>
 						<div className="col-xl-8 col-lg-7">
 							<div className="blog-details-wrap">
@@ -57,13 +50,7 @@ export default async function Page({ params }) {
 										<div className="col-xl-6 col-md-5">
 											<div className="blog-details-share">
 												<h6 className="share-title">Share Now:</h6>
-												<ul className="list-wrap mb-0">
-													<li><Link href="#"><i className="fab fa-facebook-f"></i></Link></li>
-													<li><Link href="#"><i className="fab fa-twitter"></i></Link></li>
-													<li><Link href="#"><i className="fab fa-linkedin-in"></i></Link></li>
-													<li><Link href="#"><i className="fab fa-behance"></i></Link></li>
-													<li><Link href="#"><i className="fab fa-youtube"></i></Link></li>
-												</ul>
+												<SocialShare post={post} type={'horizontal'}/>
 											</div>
 										</div>
 									</div>
