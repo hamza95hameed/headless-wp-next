@@ -1,6 +1,8 @@
 import React from 'react'
 import { getAuthor, getAuthorImage } from '@/utils/common';
 import Link from 'next/link'
+import SidebarPost from '../SidebarPost/SidebarPost';
+import { InstagramFeed } from '../InstagramFeed/InstagramFeed';
 
 const Sidebar = ({post, categories}) => {
     categories = categories.filter(category => category.name !== 'Uncategorized')
@@ -36,26 +38,7 @@ const Sidebar = ({post, categories}) => {
                 </ul>
             </div>
             <div className="widget sidebar-widget">
-                <div className="sidePost-active">
-                    <div className="sidePost__item" data-background="/img/category/ide_post01.jpg">
-                        <div className="sidePost__content">
-                            <Link href="blog.html" className="tag">Technology</Link>
-                            <h5 className="title tgcommon__hover"><Link href="blog-details.html">Tips for helping to make an your startup a success</Link></h5>
-                        </div>
-                    </div>
-                    <div className="sidePost__item" data-background="/img/category/ide_post02.jpg">
-                        <div className="sidePost__content">
-                            <Link href="blog.html" className="tag">Travel</Link>
-                            <h5 className="title tgcommon__hover"><Link href="blog-details.html">Tips for helping to make an your startup a success</Link></h5>
-                        </div>
-                    </div>
-                    <div className="sidePost__item" data-background="/img/category/ide_post02.jpg">
-                        <div className="sidePost__content">
-                            <Link href="blog.html" className="tag">Gaming</Link>
-                            <h5 className="title tgcommon__hover"><Link href="blog-details.html">Tips for helping to make an your startup a success</Link></h5>
-                        </div>
-                    </div>
-                </div>
+                <SidebarPost />
             </div>
             <div className="widget sidebar-widget">
                 <h4 className="widget-title">Instagram Feeds</h4>
@@ -70,7 +53,9 @@ const Sidebar = ({post, categories}) => {
                         </div>
                     </div>
                     <div className="sidebarInsta__slider-wrap">
-                        <div className="swiper-container sidebarInsta-active">
+                        <InstagramFeed/>
+                        <InstagramFeed dir={'rtl'}/>
+                        {/* <div className="swiper-container sidebarInsta-active">
                             <div className="swiper-wrapper">
                                 <div className="swiper-slide">
                                     <Link href="https://www.instagram.com/" target="_blank"><img src="/img/instagram/side_insta01.jpg" alt="img" /></Link>
@@ -85,8 +70,8 @@ const Sidebar = ({post, categories}) => {
                                     <Link href="https://www.instagram.com/" target="_blank"><img src="/img/instagram/side_insta04.jpg" alt="img" /></Link>
                                 </div>
                             </div>
-                        </div>
-                        <div className="swiper-container sidebarInsta-active-2" dir="rtl">
+                        </div> */}
+                        {/* <div className="swiper-container sidebarInsta-active-2" dir="rtl">
                             <div className="swiper-wrapper">
                                 <div className="swiper-slide">
                                     <Link href="https://www.instagram.com/" target="_blank"><img src="/img/instagram/side_insta05.jpg" alt="img" /></Link>
@@ -101,7 +86,7 @@ const Sidebar = ({post, categories}) => {
                                     <Link href="https://www.instagram.com/" target="_blank"><img src="/img/instagram/side_insta08.jpg" alt="img" /></Link>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                     <div className="sidebarInsta__bottom">
                         <Link href="https://www.instagram.com/" target="_blank" className="btn"><i className="fab fa-instagram"></i><span className="text">Follow Me</span></Link>

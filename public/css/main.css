@@ -5894,7 +5894,7 @@ blockquote .blockquote-cite .info span {
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
-  display: flex;
+  display: flex !important;
   align-items: center;
   gap: 10px;
   line-height: 1;
