@@ -3,12 +3,50 @@ import Breadcrumb from '@/app/components/Breadcrumb/Breadcrumb'
 import { getThumbnail, getCategory, getAuthor, formatDate } from '@/utils/common';
 import Sidebar from '@/app/components/Sidebar/Sidebar';
 
-export default async function Page({ params }) {
-    let categories = await fetch('http://localhost:3000/api/categories');
-	categories     = await categories.json();
-    let cat        = categories.find((category) => category.slug === params.slug)
-    let posts      = await fetch(`http://localhost:3000/api/posts?slug=${cat.id}&type=categories`);
-	posts          = await posts.json();
+export default async function Page({ params, searchParams }) {
+    let currentPage = searchParams.page || 1;
+    let categories  = await fetch('http://localhost:3000/api/categories');
+	categories      = await categories.json();
+    let cat         = categories.find((category) => category.slug === params.slug)
+    let data        = await fetch(`http://localhost:3000/api/posts?slug=${cat.id}&type=category&per_page=10&page=${currentPage}`,{ cache:'no-store'});
+	data            = await data.json();
+    let posts       = data['posts'];
+    let totalPages  = data['totalPages'];
+
+    const renderPagination = () => {
+        const visiblePages = [];
+      
+        // Calculate the range of visible pages
+        let startPage = Math.max(currentPage - 2, 1);
+        let endPage = Math.min(startPage + 4, totalPages);
+      
+        if (endPage - startPage < 4) {
+          startPage = Math.max(endPage - 4, 1);
+        }
+      
+        for (let i = startPage; i <= endPage; i++) {
+          visiblePages.push(i);
+        }
+      
+        const paginationElements = [];
+      
+        for (let i = 0; i < visiblePages.length; i++) {
+          const page = visiblePages[i];
+      
+          if (i > 0 && page > visiblePages[i - 1] + 1) {
+            paginationElements.push(<li key={`dots-${i}`}>&hellip;</li>);
+          }
+      
+          paginationElements.push(
+            <li key={page} className={currentPage == page ? 'active' : ''}
+            >
+              <Link href={`/category/${params.slug}?page=${page}`}>{page}</Link>
+            </li>
+          );
+        }
+      
+        return paginationElements;
+    };
 
     return (
         <>
@@ -51,12 +89,14 @@ export default async function Page({ params }) {
                                     </div>
                                 ))}
                                 <div className="pagination__wrap">
-                                    <ul className="list-wrap">
-                                        <li className="active"><Link href="#">01</Link></li>
-                                        <li><Link href="#">02</Link></li>
-                                        <li><Link href="#">...</Link></li>
-                                        <li><Link href="#">06</Link></li>
-                                        <li><Link href="#"><i className="fas fa-angle-double-right"></i></Link></li>
+                                    <ul className="list-wrap justify-content-center">
+                                        <li className={currentPage == 1 ? 'd-none' : ''}>
+                                            <Link href={`/category/${params.slug}?page=1`}><i className="fas fa-angle-double-left"></i></Link>
+                                        </li>
+                                        {renderPagination()}
+                                        <li className={currentPage == totalPages ? 'd-none' : ''}>
+                                            <Link href={`/category/${params.slug}?page=${totalPages}`}><i className="fas fa-angle-double-right"></i></Link>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>

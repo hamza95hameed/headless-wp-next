@@ -27,11 +27,10 @@ const EditorChoice = ({categories}) => {
                             <div className="featured__thumb" data-background="assets/img/blog/blog08.jpg">0{ index + 1 }</div>
                             <div className="featured__content">
                                 <ul className="tgbanner__content-meta list-wrap">
-                                    <li className="category"><Link href="blog.html">{category.name}</Link></li>
+                                    <li className="category"><Link href={`/category/${category.slug}`}>{category.name}</Link></li>
                                     {/* <li><span className="by">By</span> <Link href="blog.html">Yokolili L.</Link></li> */}
                                 </ul>
-                                <h4 className="title tgcommon__hover"><Link href="blog-details.html">A hypothetical collection of
-                                potentially diverse</Link></h4>
+                                <h4 className="title tgcommon__hover">A hypothetical collection of potentially diverse</h4>
                             </div>
                         </div>
                     </div>
