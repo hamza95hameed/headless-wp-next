@@ -37,3 +37,31 @@ export function formatDate(dateString) {
     const formattedDate = `${month} ${day}, ${year}`;
     return formattedDate;
 }
+
+export function toggleBodyClass(bodyClass){
+    var root = document.getElementsByTagName('body')[0];
+    if(bodyClass == 'canvas'){
+        if (root.getAttribute('class') == 'offCanvas__menu-visible') {
+            root.setAttribute('class', '');
+        } else {
+            root.setAttribute('class', 'offCanvas__menu-visible');
+        }
+    }
+    else if(bodyClass == 'mobile'){      
+        if (root.getAttribute('class') == 'mobile-menu-visible') {
+            root.setAttribute('class', '');
+        } else {
+            root.setAttribute('class', 'mobile-menu-visible');
+        }
+    }
+};
+
+
+export function toggleThemeMode(){
+    var root = document.getElementsByTagName('html')[0];
+    if (root.getAttribute('tg-theme') == 'light') {
+        root.setAttribute('tg-theme', 'dark');
+    } else {
+        root.setAttribute('tg-theme', 'light');
+    }
+};
