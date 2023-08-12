@@ -5,10 +5,10 @@ import Sidebar from '@/app/components/Sidebar/Sidebar';
 
 export default async function Page({ params, searchParams }) {
     let currentPage = searchParams.page || 1;
-    let categories  = await fetch('http://localhost:3000/api/categories');
+    let categories  = await fetch(`${process.env.APP_URL}/api/categories`);
 	categories      = await categories.json();
     let cat         = categories.find((category) => category.slug === params.slug)
-    let data        = await fetch(`http://localhost:3000/api/posts?slug=${cat.id}&type=category&per_page=10&page=${currentPage}`,{ cache:'no-store'});
+    let data        = await fetch(`${process.env.APP_URL}/api/posts?slug=${cat.id}&type=category&per_page=10&page=${currentPage}`,{ cache:'no-store'});
 	data            = await data.json();
     let posts       = data['posts'];
     let totalPages  = data['totalPages'];

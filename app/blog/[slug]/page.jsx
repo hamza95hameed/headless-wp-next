@@ -5,10 +5,10 @@ import { getThumbnail, getCategory, getAuthor, formatDate } from '@/utils/common
 import Sidebar from '@/app/components/Sidebar/Sidebar'
 
 export default async function Page({ params }) {
-	let post       = await fetch(`http://localhost:3000/api/posts?slug=${params.slug}&type=slug`);
+	let post       = await fetch(`${process.env.APP_URL}/api/posts?slug=${params.slug}&type=slug`);
 	post 	       = await post.json();
 	post 	       = post[0];
-	let categories = await fetch('http://localhost:3000/api/categories');
+	let categories = await fetch(`${process.env.APP_URL}/api/categories`);
 	categories     = await categories.json();
 	return (
 		<>
