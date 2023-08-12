@@ -71,7 +71,7 @@ const Header = ({ categories }) => {
                                             <li className={pathname == "/" ? "active" : ""}><Link href="/">Home</Link></li>
                                             <li className="menu-item-has-children"><Link href="#">Categories</Link>
                                                 <ul className="sub-menu">
-                                                    {categories.filter((category) => category.name != 'Uncategorized').map((category) => (
+                                                    {categories.map((category) => (
                                                         <li key={category.id} className={pathname == `/category/${category.slug}` ? "active" : ""}>
                                                             <Link href={`/category/${category.slug}`}>{category.name}</Link>
                                                         </li>
@@ -114,7 +114,7 @@ const Header = ({ categories }) => {
                                             <li className={pathname == "/" ? "active" : ""}><Link href="/">Home</Link></li>
                                             <li className="menu-item-has-children"><Link href="#">Categories</Link>
                                                 <ul className={`sub-menu ${isSubMenuOpen ? 'd-block' : ''}`}>
-                                                    {categories.filter((category) => category.name != 'Uncategorized').map((category) => (
+                                                    {categories.map((category) => (
                                                         <li key={category.id} className={pathname == `/category/${category.slug}` ? "active" : ""}>
                                                             <Link href={`/category/${category.slug}`}>{category.name}</Link>
                                                         </li>

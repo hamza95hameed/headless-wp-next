@@ -17,8 +17,40 @@ export const metadata = {
 }
 
 export default async function RootLayout({ children }) {
-	let categories = await fetch('http://localhost:3000/api/categories',{ cache:'no-store'});
-	categories     = await categories.json();
+	let categories = [
+		{
+			"id":1,
+			"name" : "Automobiles",
+			"slug" : "automobiles"
+		},
+		{
+			"id":2,
+			"name" : "Entertainment",
+			"slug" : "entertainment"
+		},
+		{
+			"id":3,
+			"name" : "Food",
+			"slug" : "food"
+		},
+		{
+			"id":4,
+			"name" : "Games",
+			"slug" : "games"
+		},
+		{
+			"id":5,
+			"name" : "Sports",
+			"slug" : "sports"
+		},
+		{
+			"id":6,
+			"name" : "Travel",
+			"slug" : "travel"
+		}
+
+	]
+
 	return (
 		<html lang="en" tg-theme="light">
 			<body>
