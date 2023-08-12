@@ -5,12 +5,46 @@ import { usePathname } from 'next/navigation';
 import { OffCanvas } from '../OffCanvas/OffCanvas';
 import { toggleBodyClass, toggleThemeMode } from '@/utils/common';
 
-const Header = ({ categories }) => {
+const Header = () => {
     const pathname        = usePathname()
-    let   isSubMenuOpen   = false;
+    let isSubMenuOpen     = false;
+    let categories        = [
+		{
+			"id":1,
+			"name" : "Automobiles",
+			"slug" : "automobiles"
+		},
+		{
+			"id":2,
+			"name" : "Entertainment",
+			"slug" : "entertainment"
+		},
+		{
+			"id":3,
+			"name" : "Food",
+			"slug" : "food"
+		},
+		{
+			"id":4,
+			"name" : "Games",
+			"slug" : "games"
+		},
+		{
+			"id":5,
+			"name" : "Sports",
+			"slug" : "sports"
+		},
+		{
+			"id":6,
+			"name" : "Travel",
+			"slug" : "travel"
+		}
+
+	];
     const openSubMenu = () =>{
         isSubMenuOpen = !isSubMenuOpen;
     }
+
     return (
         <header>
             <div className="header__top">
