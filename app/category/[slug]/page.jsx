@@ -1,24 +1,20 @@
 import Link from 'next/link'
-import Breadcrumb from '@/app/components/Breadcrumb/Breadcrumb'
-import { getThumbnail, getCategory, getAuthor, formatDate } from '@/utils/common';
-import Sidebar from '@/app/components/Sidebar/Sidebar';
+import Breadcrumb from '@/components/Breadcrumb/Breadcrumb'
+import { getThumbnail, getCategory, getAuthor, formatDate, getPostsByFilterType, getCategories } from '@/utils/common';
+import Sidebar from '@/components/Sidebar/Sidebar';
 
 export default async function Page({ params, searchParams }) {
     let currentPage = searchParams.page || 1;
-    let categories  = await fetch(`${process.env.APP_URL}/api/categories`);
-	categories      = await categories.json();
+    let categories  = await getCategories();
     let cat         = categories.find((category) => category.slug === params.slug)
-    let data        = await fetch(`${process.env.APP_URL}/api/posts?slug=${cat.id}&type=category&per_page=10&page=${currentPage}`,{ cache:'no-store'});
-	data            = await data.json();
+    let data        = await getPostsByFilterType('categories', cat.id, currentPage, 10);
     let posts       = data['posts'];
     let totalPages  = data['totalPages'];
 
     const renderPagination = () => {
         const visiblePages = [];
-      
-        // Calculate the range of visible pages
         let startPage = Math.max(currentPage - 2, 1);
-        let endPage = Math.min(startPage + 4, totalPages);
+        let endPage   = Math.min(startPage + 4, totalPages);
       
         if (endPage - startPage < 4) {
           startPage = Math.max(endPage - 4, 1);

@@ -1,15 +1,12 @@
-import Breadcrumb from "@/app/components/Breadcrumb/Breadcrumb"
-import {SocialShare} from "@/app/components/SocialShare/SocialShare";
+import Breadcrumb from "@/components/Breadcrumb/Breadcrumb"
+import {SocialShare} from "@/components/SocialShare/SocialShare";
 import Link from 'next/link'
-import { getThumbnail, getCategory, getAuthor, formatDate } from '@/utils/common';
-import Sidebar from '@/app/components/Sidebar/Sidebar'
+import { getThumbnail, getCategory, getAuthor, formatDate, getPostByHandle, getCategories } from '@/utils/common';
+import Sidebar from '@/components/Sidebar/Sidebar'
 
 export default async function Page({ params }) {
-	let post       = await fetch(`${process.env.APP_URL}/api/posts?slug=${params.slug}&type=slug`);
-	post 	       = await post.json();
-	post 	       = post[0];
-	let categories = await fetch(`${process.env.APP_URL}/api/categories`);
-	categories     = await categories.json();
+	let post       = await getPostByHandle(params.slug);
+	let categories = await getCategories();
 	return (
 		<>
 			<Breadcrumb type={'blog'} name={post.title.rendered}></Breadcrumb>

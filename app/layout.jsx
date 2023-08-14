@@ -8,8 +8,8 @@ import '../public/css/flaticon.css'
 import '../public/css/slick.css'
 import '../public/css/spacing.css'
 import '../public/css/main.css'
-import Header from './components/Header/Header'
-import Footer from './components/Footer/Footer'
+import Header from '@/components/Header/Header'
+import Footer from '@/components/Footer/Footer'
 
 export const metadata = {
 	title: 'Create Next App',
