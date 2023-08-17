@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation';
 import { OffCanvas } from '../OffCanvas/OffCanvas';
 import { toggleBodyClass, toggleThemeMode } from '@/utils/common';
+import { Search } from '../Search/Search';
 
 const Header = () => {
     const pathname        = usePathname()
@@ -51,11 +52,7 @@ const Header = () => {
                 <div className="container">
                     <div className="row align-items-center">
                         <div className="col-lg-4 col-md-6 col-sm-6 order-2 order-lg-0">
-                            <div className="header__top-search">
-                                <form action="#">
-                                    <input type="text" placeholder="Search here..." />
-                                </form>
-                            </div>
+                            <Search></Search>
                         </div>
                         <div className="col-lg-4 col-md-3 order-0 order-lg-2 d-none d-md-block">
                             <div className="header__top-logo logo text-lg-center">
