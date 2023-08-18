@@ -20,12 +20,12 @@ export default async function Home() {
   return (
     <main>
       <Banner posts={bannerPosts}></Banner>
-      <Trending posts={posts['Sports']}></Trending>
+      {posts['Sports'] && <Trending posts={posts['Sports']}></Trending>}
       <EditorChoice categories={categories}></EditorChoice>
       <Advertisement></Advertisement>
-      <VideoPost posts={posts['Games']}></VideoPost>
-      <HandPicked posts={posts['Travel']}></HandPicked>
-      <StoriesPost posts={posts['Entertainment']}></StoriesPost>
+      {posts['Games'] && <VideoPost posts={posts['Games']}></VideoPost>}
+      {posts['Travel'] && <HandPicked posts={posts['Travel']}></HandPicked>}
+      {posts['Entertainment'] && <StoriesPost posts={posts['Entertainment']}></StoriesPost>}
       <Newsletter></Newsletter>
     </main>
   )

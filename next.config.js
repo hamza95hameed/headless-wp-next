@@ -2,3 +2,16 @@
 const nextConfig = {}
 
 module.exports = nextConfig
+
+module.exports = {
+    images: {
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'newsparho.com',
+                port: '',
+                pathname: '/wp-content/uploads/**',
+            },
+        ],
+    },
+}

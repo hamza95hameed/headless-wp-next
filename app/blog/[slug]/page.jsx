@@ -1,6 +1,7 @@
 import Breadcrumb from "@/components/Breadcrumb/Breadcrumb"
 import {SocialShare} from "@/components/SocialShare/SocialShare";
 import Link from 'next/link'
+import Image from "next/image";
 import { getThumbnail, getCategory, getAuthor, formatDate, getPostByHandle, getCategories } from '@/utils/common';
 import Sidebar from '@/components/Sidebar/Sidebar'
 
@@ -17,7 +18,7 @@ export default async function Page({ params }) {
 						<SocialShare post={post} type={'vertical'} />
 						</div>
 						<div className="col-xl-8 col-lg-7">
-							<div className="blog-details-wrap">
+							<div className="blog-details-wrap overflow-hidden">
 								<ul className="tgbanner__content-meta list-wrap">
 									<li className="category"><Link href={`/category/${getCategory(post).slug}`}>{getCategory(post).name}</Link></li>
 									<li><span className="by">By</span> <Link href={`/author/${getAuthor(post).slug}`}>{getAuthor(post).name}</Link></li>
@@ -26,7 +27,7 @@ export default async function Page({ params }) {
 								</ul>
 								<h2 className="title" dangerouslySetInnerHTML={{ __html: post.title.rendered }}></h2>
 								<div className="blog-details-thumb">
-									<img src={getThumbnail(post)} alt="" />
+									<Image width={820} height={440} loading="eager" priority={true} src={getThumbnail(post)} alt="alt" />
 								</div>
 								<div className="blog-details-content" dangerouslySetInnerHTML={{ __html: post.content.rendered }}>
 									
@@ -54,7 +55,7 @@ export default async function Page({ params }) {
 								</div>
 								<div className="blog-avatar-wrap">
 									<div className="blog-avatar-img">
-										<Link href="#"><i className="far fa-check"></i><img src="/img/others/avatar.png" alt="img" /></Link>
+										<Link href="#"><i className="far fa-check"></i><Image width={120} height={120} loading="eager" priority={true} src="/img/others/avatar.png" alt="img" /></Link>
 									</div>
 									<div className="blog-avatar-content">
 										<p>Monty Hython is a Writer at Sarsa and has been covering emerging technologies &

@@ -1,6 +1,7 @@
 "use client"
 import React from 'react'
 import Link from 'next/link'
+import Image from "next/image";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import { getThumbnail, getCategory, getAuthor } from '@/utils/common';
@@ -20,7 +21,7 @@ const Trending = ({ posts }) => {
                         </div>
                         <div className="col-sm-6">
                             <div className="section__read-more text-start text-sm-end">
-                                <Link href="/blog">More Post <i className="far fa-long-arrow-right"></i></Link>
+                                <Link href="/category/sports">More Post <i className="far fa-long-arrow-right"></i></Link>
                             </div>
                         </div>
                     </div>
@@ -59,7 +60,9 @@ const Trending = ({ posts }) => {
                                             <div className="trending__post">
                                                 <div className="trending__post-thumb tgImage__hover">
                                                     <Link href="#" className="addWish"><i className="fal fa-heart"></i></Link>
-                                                    <Link href={`/blog/${post.slug}`}><img src={getThumbnail(post)} width="100%" height="auto" alt="img" /></Link>
+                                                    <Link href={`/blog/${post.slug}`}>
+                                                        <Image width={820} height={440} loading="eager" priority={true}src={getThumbnail(post)} alt="img" />
+                                                    </Link>
                                                     <span className="is_trend"><i className="fas fa-bolt"></i></span>
                                                 </div>
                                                 <div className="trending__post-content">

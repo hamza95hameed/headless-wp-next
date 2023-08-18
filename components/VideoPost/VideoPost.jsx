@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import Image from "next/image";
 import { formatDate, getCategory, getThumbnail, getAuthor } from '@/utils/common'
 
 const VideoPost = ({posts}) => {
@@ -10,13 +11,13 @@ const VideoPost = ({posts}) => {
                 <div className="row align-items-end">
                     <div className="col-sm-6">
                         <div className="section__title">
-                            <span className="section__sub-title">Video</span>
-                            <h3 className="section__main-title">Recent Video Post</h3>
+                            <span className="section__sub-title">Games</span>
+                            <h3 className="section__main-title">Recent Games Post</h3>
                         </div>
                     </div>
                     <div className="col-sm-6">
                         <div className="section__read-more text-start text-sm-end">
-                            <Link href="blog.html">More Video Post <i className="far fa-long-arrow-right"></i></Link>
+                            <Link href="/category/games">More Post <i className="far fa-long-arrow-right"></i></Link>
                         </div>
                     </div>
                 </div>
@@ -25,7 +26,9 @@ const VideoPost = ({posts}) => {
                 <div className="col-xl-8 col-lg-7">
                     <div className="video__post-item big-post">
                         <div className="video__post-thumb">
-                            <Link href={`/blog/${posts[0].slug}`}><img src={getThumbnail(posts[0])} alt="img" /></Link>
+                            <Link href={`/blog/${posts[0].slug}`}>
+                                <Image width={820} height={440} loading="eager" priority={true} src={getThumbnail(posts[0])} alt="img" />
+                            </Link>
                         </div>
                         <div className="video__post-content">
                             <ul className="tgbanner__content-meta list-wrap">
@@ -41,7 +44,9 @@ const VideoPost = ({posts}) => {
                     {posts.slice(1,5).map(post => (
                         <div className="video__post-item side-post">
                             <div className="video__post-thumb tgImage__hover">
-                                <Link href={`/blog/${post.slug}`} className="popup-video"><img src={getThumbnail(post)} alt="img" /></Link>
+                                <Link href={`/blog/${post.slug}`} className="popup-video">
+                                    <Image width={820} height={440} loading="eager" priority={true} src={getThumbnail(post)} alt="img" />
+                                </Link>
                             </div>
                             <div className="video__post-content">
                                 <ul className="tgbanner__content-meta list-wrap">

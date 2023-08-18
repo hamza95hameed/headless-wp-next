@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import Image from "next/image";
 import { formatDate, getAuthor, getCategory, getThumbnail } from '@/utils/common'
 
 const StoriesPost = ({posts}) => {
@@ -10,13 +11,13 @@ const StoriesPost = ({posts}) => {
                 <div className="row align-items-end">
                     <div className="col-sm-6">
                         <div className="section__title">
-                            <span className="section__sub-title">Stories</span>
-                            <h3 className="section__main-title">Popular Stories</h3>
+                            <span className="section__sub-title">Entertainment</span>
+                            <h3 className="section__main-title">Popular Entertainment</h3>
                         </div>
                     </div>
                     <div className="col-sm-6">
                         <div className="section__read-more text-start text-sm-end">
-                            <Link href="blog.html">Stories Post <i className="far fa-long-arrow-right"></i></Link>
+                            <Link href="/category/entertainment">Entertainment Post <i className="far fa-long-arrow-right"></i></Link>
                         </div>
                     </div>
                 </div>
@@ -26,7 +27,9 @@ const StoriesPost = ({posts}) => {
                     <div className="col-md-6">
                         <div className="stories-post__item">
                             <div className="stories-post__thumb tgImage__hover">
-                                <Link href={`/blog/${post.slug}`}><img src={getThumbnail(post)} width="100%" height="auto" alt="img" /></Link>
+                                <Link href={`/blog/${post.slug}`}>
+                                    <Image width={820} height={440} loading="eager" priority={true} src={getThumbnail(post)} alt="img" />
+                                </Link>
                             </div>
                             <div className="stories-post__content video__post-content">
                                 <ul className="tgbanner__content-meta list-wrap">
@@ -48,7 +51,7 @@ const StoriesPost = ({posts}) => {
                         <div className="trending__post stories-small-post__item">
                             <div className="trending__post-thumb tgImage__hover">
                                 <Link href="#" className="addWish"><i className="fal fa-heart"></i></Link>
-                                <Link href={`/blog/${post.slug}`}><img src={getThumbnail(post)} width="100%" height="auto" alt="img" /></Link>
+                                <Link href={`/blog/${post.slug}`}><Image width={820} height={440} loading="eager" priority={true} src={getThumbnail(post)} alt="img" /></Link>
                             </div>
                             <div className="trending__post-content">
                                 <ul className="tgbanner__content-meta list-wrap">

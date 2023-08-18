@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from "next/image";
 import Breadcrumb from '@/components/Breadcrumb/Breadcrumb'
 import { getThumbnail, getCategory, getAuthor, formatDate, getPostsByFilterType, getCategories } from '@/utils/common';
 import Sidebar from '@/components/Sidebar/Sidebar';
@@ -66,7 +67,7 @@ export default async function Page({ params, searchParams }) {
                                 {posts.map((post) => (
                                     <div className="latest__post-item" key={post.id}>
                                         <div className="latest__post-thumb tgImage__hover">
-                                            <Link href={`/blog/${post.slug}`}><img src={getThumbnail(post)} width="100%" alt="img" /></Link>
+                                            <Link href={`/blog/${post.slug}`}><Image width={820} height={440} loading="eager" priority={true} src={getThumbnail(post)} alt="img" /></Link>
                                         </div>
                                         <div className="latest__post-content">
                                             <ul className="tgbanner__content-meta list-wrap">

@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import Image from "next/image";
 import { formatDate, getAuthor, getCategory, getThumbnail } from '@/utils/common'
 
 const Banner = ({posts}) => {
@@ -9,7 +10,9 @@ const Banner = ({posts}) => {
                 <div className="tgbanner__grid">
                     <div className="tgbanner__post big-post">
                         <div className="tgbanner__thumb tgImage__hover">
-                            <Link href={`/blog/${posts[0].slug}`}><img src={getThumbnail(posts[0])} alt="img" /></Link>
+                            <Link href={`/blog/${posts[0].slug}`}>
+                                <Image width={820} height={440} loading="eager" priority={true} src={getThumbnail(posts[0])} alt="img" />
+                            </Link>
                         </div>
                         <div className="tgbanner__content">
                             <ul className="tgbanner__content-meta list-wrap">
@@ -25,7 +28,9 @@ const Banner = ({posts}) => {
                     <div className="tgbanner__side-post">
                         <div className="tgbanner__post small-post">
                             <div className="tgbanner__thumb tgImage__hover">
-                                <Link href={`/blog/${posts[1].slug}`}><img src={getThumbnail(posts[1])} alt="img" /></Link>
+                                <Link href={`/blog/${posts[1].slug}`}>
+                                    <Image width={820} height={440} loading="eager" priority={true} src={getThumbnail(posts[1])} alt="img" />
+                                </Link>
                             </div>
                             <div className="tgbanner__content">
                                 <ul className="tgbanner__content-meta list-wrap">
@@ -38,7 +43,9 @@ const Banner = ({posts}) => {
                         </div>
                         <div className="tgbanner__post small-post">
                             <div className="tgbanner__thumb tgImage__hover">
-                                <Link href={`/blog/${posts[2].slug}`}><img src={getThumbnail(posts[2])} alt="img" /></Link>
+                                <Link href={`/blog/${posts[2].slug}`}>
+                                    <Image width={820} height={440} loading="eager" priority={true} src={getThumbnail(posts[2])} alt="img" />
+                                </Link>
                             </div>
                             <div className="tgbanner__content">
                                 <ul className="tgbanner__content-meta list-wrap">

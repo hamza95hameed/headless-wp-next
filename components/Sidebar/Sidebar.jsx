@@ -55,38 +55,6 @@ const Sidebar = ({post, categories}) => {
                     <div className="sidebarInsta__slider-wrap">
                         <InstagramFeed/>
                         <InstagramFeed dir={'rtl'}/>
-                        {/* <div className="swiper-container sidebarInsta-active">
-                            <div className="swiper-wrapper">
-                                <div className="swiper-slide">
-                                    <Link href="https://www.instagram.com/" target="_blank"><img src="/img/instagram/side_insta01.jpg" alt="img" /></Link>
-                                </div>
-                                <div className="swiper-slide">
-                                    <Link href="https://www.instagram.com/" target="_blank"><img src="/img/instagram/side_insta02.jpg" alt="img" /></Link>
-                                </div>
-                                <div className="swiper-slide">
-                                    <Link href="https://www.instagram.com/" target="_blank"><img src="/img/instagram/side_insta03.jpg" alt="img" /></Link>
-                                </div>
-                                <div className="swiper-slide">
-                                    <Link href="https://www.instagram.com/" target="_blank"><img src="/img/instagram/side_insta04.jpg" alt="img" /></Link>
-                                </div>
-                            </div>
-                        </div> */}
-                        {/* <div className="swiper-container sidebarInsta-active-2" dir="rtl">
-                            <div className="swiper-wrapper">
-                                <div className="swiper-slide">
-                                    <Link href="https://www.instagram.com/" target="_blank"><img src="/img/instagram/side_insta05.jpg" alt="img" /></Link>
-                                </div>
-                                <div className="swiper-slide">
-                                    <Link href="https://www.instagram.com/" target="_blank"><img src="/img/instagram/side_insta06.jpg" alt="img" /></Link>
-                                </div>
-                                <div className="swiper-slide">
-                                    <Link href="https://www.instagram.com/" target="_blank"><img src="/img/instagram/side_insta07.jpg" alt="img" /></Link>
-                                </div>
-                                <div className="swiper-slide">
-                                    <Link href="https://www.instagram.com/" target="_blank"><img src="/img/instagram/side_insta08.jpg" alt="img" /></Link>
-                                </div>
-                            </div>
-                        </div> */}
                     </div>
                     <div className="sidebarInsta__bottom">
                         <Link href="https://www.instagram.com/" target="_blank" className="btn"><i className="fab fa-instagram"></i><span className="text">Follow Me</span></Link>

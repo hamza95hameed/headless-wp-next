@@ -2,6 +2,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { Swiper, SwiperSlide } from 'swiper/react';
+import Image from "next/image";
 import { Autoplay } from 'swiper/modules';
 import { getThumbnail, getCategory, getAuthor } from '@/utils/common';
 import 'swiper/css';
@@ -14,13 +15,13 @@ const HandPicked = ({posts}) => {
                     <div className="row align-items-end">
                         <div className="col-sm-6">
                             <div className="section__title">
-                                <span className="section__sub-title">hand-picked</span>
+                                <span className="section__sub-title">Travel</span>
                                 <h3 className="section__main-title">More to Watch</h3>
                             </div>
                         </div>
                         <div className="col-sm-6">
                             <div className="section__read-more text-start text-sm-end">
-                                <Link href="blog.html">Hand-Picked Post <i className="far fa-long-arrow-right"></i></Link>
+                                <Link href="/category/travel">Travel Post <i className="far fa-long-arrow-right"></i></Link>
                             </div>
                         </div>
                     </div>
@@ -60,7 +61,9 @@ const HandPicked = ({posts}) => {
                                         <div className="trending__post">
                                             <div className="trending__post-thumb tgImage__hover">
                                                 <Link href="#" className="addWish"><i className="fal fa-heart"></i></Link>
-                                                <Link href={`/blog/${post.slug}`}><img src={getThumbnail(post)} width="100%" height="auto" alt="img" /></Link>
+                                                <Link href={`/blog/${post.slug}`}>
+                                                    <Image width={820} height={440} loading="eager" priority={true} src={getThumbnail(post)} alt="img" />
+                                                </Link>
                                                 <span className="is_trend"><i className="fas fa-bolt"></i></span>
                                             </div>
                                             <div className="trending__post-content">
