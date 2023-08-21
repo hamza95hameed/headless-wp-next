@@ -14,14 +14,14 @@ export const OffCanvas = () => {
                             <Link href="/" className="logo-light"><img src="/img/logo/w_logo.png" alt="Logo" /></Link>
                         </div>
                         <p>Change how the world works with Biotellus, made for ecology.</p>
-                        <ul className="offCanvas__instagram list-wrap">
-                            <li><Link href="/img/blog/blog01.jpg" className="popup-image"><img src="/img/blog/blog01.jpg" alt="img" /></Link></li>
-                            <li><Link href="/img/blog/blog02.jpg" className="popup-image"><img src="/img/blog/blog02.jpg" alt="img" /></Link></li>
-                            <li><Link href="/img/blog/blog03.jpg" className="popup-image"><img src="/img/blog/blog03.jpg" alt="img" /></Link></li>
-                            <li><Link href="/img/blog/blog04.jpg" className="popup-image"><img src="/img/blog/blog04.jpg" alt="img" /></Link></li>
-                            <li><Link href="/img/blog/blog05.jpg" className="popup-image"><img src="/img/blog/blog05.jpg" alt="img" /></Link></li>
-                            <li><Link href="/img/blog/blog06.jpg" className="popup-image"><img src="/img/blog/blog06.jpg" alt="img" /></Link></li>
-                        </ul>
+                        {/* <ul className="offCanvas__instagram list-wrap">
+                            <li><Link href="" className="popup-image"><img src="" alt="img" /></Link></li>
+                            <li><Link href="" className="popup-image"><img src="" alt="img" /></Link></li>
+                            <li><Link href="" className="popup-image"><img src="" alt="img" /></Link></li>
+                            <li><Link href="" className="popup-image"><img src="" alt="img" /></Link></li>
+                            <li><Link href="" className="popup-image"><img src="" alt="img" /></Link></li>
+                            <li><Link href="" className="popup-image"><img src="" alt="img" /></Link></li>
+                        </ul> */}
                     </div>
                     <div className="offCanvas__contact">
                         <h4 className="title">Get In Touch</h4>
