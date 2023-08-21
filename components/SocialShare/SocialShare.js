@@ -14,13 +14,14 @@ import {
   } from 'next-share'
   
 export const SocialShare = ({post, type}) => {
+    const URL = process.env.NODE_ENV == "production" ? process.env.APP_URL + post.slug: 'http://localhost:3000/'+ post.slug
     if(type == 'vertical'){
         return (
           <div className="blog-details-social">
               <ul className="list-wrap">
                   <li>
                       <FacebookShareButton
-                          url={post.link}
+                          url={URL}
                           quote={post.title.rendered}
                           hashtag={'#nextshare'}
                       >
@@ -29,7 +30,7 @@ export const SocialShare = ({post, type}) => {
                   </li>
                   <li>
                       <TwitterShareButton
-                          url={post.link}
+                          url={URL}
                           title={post.title.rendered}
                       >
                           <TwitterIcon size={50} round bgStyle={{ fill: '#fff' }} iconFillColor='black'/>
@@ -37,13 +38,13 @@ export const SocialShare = ({post, type}) => {
                   </li>
                   <li>
                       <LinkedinShareButton
-                          url={post.link}
+                          url={URL}
                       >
                           <LinkedinIcon size={50} round bgStyle={{ fill: '#fff' }} iconFillColor='black'/>
                       </LinkedinShareButton></li>
                   <li>
                   <WhatsappShareButton
-                      url={post.link}
+                      url={URL}
                       title={post.title.rendered}
                       separator=":: "
                   >
@@ -52,7 +53,7 @@ export const SocialShare = ({post, type}) => {
                   </li>
                   <li>
                   <PinterestShareButton
-                      url={post.link}
+                      url={URL}
                       media={post.title.rendered}
                   >
                       <PinterestIcon size={50} round bgStyle={{ fill: '#fff' }} iconFillColor='black'/>
@@ -67,7 +68,7 @@ export const SocialShare = ({post, type}) => {
             <ul className="list-wrap mb-0">
                 <li>
                     <FacebookShareButton
-                        url={post.link}
+                        url={URL}
                         quote={post.title.rendered}
                         hashtag={'#nextshare'}
                     >
@@ -76,7 +77,7 @@ export const SocialShare = ({post, type}) => {
                 </li>
                 <li>
                     <TwitterShareButton
-                        url={post.link}
+                        url={URL}
                         title={post.title.rendered}
                     >
                         <TwitterIcon size={30} bgStyle={{ fill: 'transparent' }} iconFillColor='black'/>
@@ -84,13 +85,13 @@ export const SocialShare = ({post, type}) => {
                 </li>
                 <li>
                     <LinkedinShareButton
-                        url={post.link}
+                        url={URL}
                     >
                         <LinkedinIcon size={30} bgStyle={{ fill: 'transparent' }} iconFillColor='black'/>
                     </LinkedinShareButton></li>
                 <li>
                 <WhatsappShareButton
-                    url={post.link}
+                    url={URL}
                     title={post.title.rendered}
                     separator=":: "
                 >
@@ -99,7 +100,7 @@ export const SocialShare = ({post, type}) => {
                 </li>
                 <li>
                 <PinterestShareButton
-                    url={post.link}
+                    url={URL}
                     media={post.title.rendered}
                 >
                     <PinterestIcon size={30} bgStyle={{ fill: 'transparent' }} iconFillColor='black'/>

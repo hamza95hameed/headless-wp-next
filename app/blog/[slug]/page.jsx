@@ -1,9 +1,46 @@
 import Breadcrumb from "@/components/Breadcrumb/Breadcrumb"
-import {SocialShare} from "@/components/SocialShare/SocialShare";
+import { SocialShare } from "@/components/SocialShare/SocialShare";
 import Link from 'next/link'
 import Image from "next/image";
 import { getThumbnail, getCategory, getAuthor, formatDate, getPostByHandle, getCategories } from '@/utils/common';
 import Sidebar from '@/components/Sidebar/Sidebar'
+
+export async function generateMetadata({ params, searchParams }, parent) {
+	const post = await getPostByHandle(params.slug);
+
+	return {
+		title: post.yoast_head_json.title,
+		description: post.yoast_head_json.og_description,
+		openGraph: {
+			title: post.yoast_head_json.title,
+			description: post.yoast_head_json.og_description,
+			url: process.env.APP_URL,
+			siteName: process.env.SITE_NAME,
+			images: [
+				{
+					url: getThumbnail(post),
+					width: 800,
+					height: 600,
+				},
+				{
+					url: getThumbnail(post),
+					width: 1800,
+					height: 1600,
+					alt: 'My custom alt',
+				},
+			],
+			locale: 'en_US',
+			type: 'website',
+		},
+		twitter: {
+			card: 'summary_large_image',
+			title: post.yoast_head_json.title,
+			description: post.yoast_head_json.og_description,
+			images: [getThumbnail(post)],
+		},
+	}
+}
+
 
 export default async function Page({ params }) {
 	let post       = await getPostByHandle(params.slug);
@@ -15,7 +52,7 @@ export default async function Page({ params }) {
 				<div className="container">
 					<div className="row justify-content-center">
 						<div className="col-lg-1">
-						<SocialShare post={post} type={'vertical'} />
+							<SocialShare post={post} type={'vertical'} />
 						</div>
 						<div className="col-xl-8 col-lg-7">
 							<div className="blog-details-wrap overflow-hidden">
@@ -30,7 +67,7 @@ export default async function Page({ params }) {
 									<Image width={820} height={440} loading="eager" priority={true} src={getThumbnail(post)} alt="alt" />
 								</div>
 								<div className="blog-details-content" dangerouslySetInnerHTML={{ __html: post.content.rendered }}>
-									
+
 								</div>
 								<div className="blog-details-bottom">
 									<div className="row align-items-baseline">
@@ -41,14 +78,14 @@ export default async function Page({ params }) {
 														<li key={category.id}>
 															<Link href={`/category/${category.slug}`}>{category.name}</Link>
 														</li>
-													))}						
+													))}
 												</ul>
 											</div>
 										</div>
 										<div className="col-xl-6 col-md-5">
 											<div className="blog-details-share">
 												<h6 className="share-title">Share Now:</h6>
-												<SocialShare post={post} type={'horizontal'}/>
+												<SocialShare post={post} type={'horizontal'} />
 											</div>
 										</div>
 									</div>
