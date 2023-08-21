@@ -4,41 +4,17 @@ import Link from 'next/link'
 import Image from "next/image";
 import { getThumbnail, getCategory, getAuthor, formatDate, getPostByHandle, getCategories } from '@/utils/common';
 import Sidebar from '@/components/Sidebar/Sidebar'
+import { websiteSeo } from '@/utils/seo'
 
 export async function generateMetadata({ params, searchParams }, parent) {
 	const post = await getPostByHandle(params.slug);
-
-	return {
+	const data = {
 		title: post.yoast_head_json.title,
 		description: post.yoast_head_json.og_description,
-		openGraph: {
-			title: post.yoast_head_json.title,
-			description: post.yoast_head_json.og_description,
-			url: process.env.NODE_ENV == "production" ? process.env.NEXT_PUBLIC_APP_URL +'/blog/'+ post.slug : `http://localhost:3000/blog/${post.slug}`,
-			siteName: process.env.NEXT_PUBLIC_SITE_NAME,
-			images: [
-				{
-					url: getThumbnail(post),
-					width: 800,
-					height: 600,
-				},
-				{
-					url: getThumbnail(post),
-					width: 1800,
-					height: 1600,
-					alt: 'My custom alt',
-				},
-			],
-			locale: 'en_US',
-			type: 'website',
-		},
-		twitter: {
-			card: 'summary_large_image',
-			title: post.yoast_head_json.title,
-			description: post.yoast_head_json.og_description,
-			images: [getThumbnail(post)],
-		},
+		slug: post.slug,
+		image: getThumbnail(post)
 	}
+	return websiteSeo(data, 'blog')
 }
 
 

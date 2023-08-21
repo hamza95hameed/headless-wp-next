@@ -81,6 +81,13 @@ export async function getCategories(){
     return categories;
 }
 
+export async function getCategoryByHandle(handle){
+    const url      = `${process.env.NEXT_PUBLIC_API_URL}/categories?slug=${handle}&_embed=true`;
+    const data     = await fetch(url)
+    const category = await data.json()
+    return category[0];
+}
+
 export async function getPostByHandle(handle){
     const url  = `${process.env.NEXT_PUBLIC_API_URL}/posts?slug=${handle}&_embed=true`;
     const data = await fetch(url)

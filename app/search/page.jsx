@@ -5,6 +5,17 @@ import Image from "next/image";
 import Sidebar from '@/components/Sidebar/Sidebar';
 import { getThumbnail, getCategory, getAuthor, formatDate, getPostsByFilterType, getCategories } from '@/utils/common';
 
+
+export async function generateMetadata({ params, searchParams }, parent) {
+	const data = {
+		title: searchParams.s,
+		description: '',
+		slug: searchParams.s,
+		image: ''
+	}
+	return websiteSeo(data, 'search')
+}
+
 export default async function Page({ searchParams }) {
     let currentPage = searchParams.page || 1;
     let categories  = await getCategories();
