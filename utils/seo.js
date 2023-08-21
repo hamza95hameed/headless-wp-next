@@ -27,7 +27,7 @@ export const websiteSeo = (data, page) => {
             type: 'website',
         },
         twitter: {
-            card: 'summary',
+            card: 'summary_large_image',
             title: title,
             description: description,
             site: process.env.NEXT_PUBLIC_SITE_NAME,
