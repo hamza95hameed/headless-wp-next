@@ -14,7 +14,7 @@ export async function generateMetadata({ params, searchParams }, parent) {
 		openGraph: {
 			title: post.yoast_head_json.title,
 			description: post.yoast_head_json.og_description,
-			url: process.env.NODE_ENV == "production" ? process.env.NEXT_PUBLIC_APP_URL + post.slug : `http://localhost:3000/${post.slug}`,
+			url: process.env.NODE_ENV == "production" ? process.env.NEXT_PUBLIC_APP_URL +'/blog/'+ post.slug : `http://localhost:3000/blog/${post.slug}`,
 			siteName: process.env.NEXT_PUBLIC_SITE_NAME,
 			images: [
 				{
