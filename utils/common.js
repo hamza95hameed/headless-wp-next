@@ -67,7 +67,7 @@ export function toggleThemeMode(){
 };
 
 export async function getPostsByFilterType(type, slug, page=1, per_page=10){
-    const url        = `${process.env.API_URL}/posts?${type}=${slug}&_embed=true&orderBy=desc&per_page=${per_page}&page=${page}`;
+    const url        = `${process.env.NEXT_PUBLIC_API_URL}/posts?${type}=${slug}&_embed=true&orderBy=desc&per_page=${per_page}&page=${page}`;
     const data       = await fetch(url)
     const posts      = await data.json();
     const totalPages = parseInt(data.headers.get('X-WP-TotalPages'), 10);
@@ -75,21 +75,21 @@ export async function getPostsByFilterType(type, slug, page=1, per_page=10){
 }
 
 export async function getCategories(){
-    const url        = `${process.env.API_URL}/categories?_embed=true&per_page=100`;
+    const url        = `${process.env.NEXT_PUBLIC_API_URL}/categories?_embed=true&per_page=100`;
     const data       = await fetch(url)
     const categories = await data.json()
     return categories;
 }
 
 export async function getPostByHandle(handle){
-    const url  = `${process.env.API_URL}/posts?slug=${handle}&_embed=true`;
+    const url  = `${process.env.NEXT_PUBLIC_API_URL}/posts?slug=${handle}&_embed=true`;
     const data = await fetch(url)
     const post = await data.json();
     return post[0];
 }
 
 export async function getPostByCategory(handle){
-    let url     = `${process.env.API_URL}/posts?categories=${handle}&_embed=true&orderBy=desc`;
+    let url     = `${process.env.NEXT_PUBLIC_API_URL}/posts?categories=${handle}&_embed=true&orderBy=desc`;
     const data  = await fetch(url, { cache:'no-store'})
     const posts = await data.json();
     return posts;
