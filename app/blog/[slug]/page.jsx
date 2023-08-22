@@ -21,6 +21,10 @@ export async function generateMetadata({ params, searchParams }, parent) {
 export default async function Page({ params }) {
 	let post       = await getPostByHandle(params.slug);
 	let categories = await getCategories();
+	let sharePost  = {
+		title: post.title.rendered,
+		slug: `/blog/${post.slug}`
+	}
 	return (
 		<>
 			<Breadcrumb type={'blog'} name={post.title.rendered}></Breadcrumb>
@@ -28,7 +32,7 @@ export default async function Page({ params }) {
 				<div className="container">
 					<div className="row justify-content-center">
 						<div className="col-lg-1">
-							<SocialShare post={post} type={'vertical'} />
+							<SocialShare post={sharePost} type={'vertical'} />
 						</div>
 						<div className="col-xl-8 col-lg-7">
 							<div className="blog-details-wrap overflow-hidden">

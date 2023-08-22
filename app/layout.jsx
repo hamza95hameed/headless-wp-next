@@ -1,4 +1,4 @@
-import '../public/css/bootstrap.min.css'
+import 'bootstrap/dist/css/bootstrap.css'
 import '../public/css/animate.min.css'
 import '../public/css/magnific-popup.css'
 import '../public/css/fontawesome-all.min.css'

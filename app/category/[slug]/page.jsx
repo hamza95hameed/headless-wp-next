@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from "next/image";
 import Breadcrumb from '@/components/Breadcrumb/Breadcrumb'
+import { SocialShare } from "@/components/SocialShare/SocialShare";
 import { getThumbnail, getCategory, getAuthor, formatDate, getPostsByFilterType, getCategories, getCategoryByHandle } from '@/utils/common';
 import Sidebar from '@/components/Sidebar/Sidebar';
 import { websiteSeo } from '@/utils/seo'
@@ -18,12 +19,16 @@ export async function generateMetadata({ params, searchParams }, parent) {
 
 
 export default async function Page({ params, searchParams }) {
-    let currentPage = searchParams.page || 1;
-    let categories  = await getCategories();
-    let cat         = categories.find((category) => category.slug === params.slug)
-    let data        = await getPostsByFilterType('categories', cat.id, currentPage, 10);
-    let posts       = data['posts'];
-    let totalPages  = data['totalPages'];
+    let currentPage   = searchParams.page || 1;
+    let categories    = await getCategories();
+    let cat           = categories.find((category) => category.slug === params.slug)
+    let data          = await getPostsByFilterType('categories', cat.id, currentPage, 10);
+    let posts         = data['posts'];
+    let totalPages    = data['totalPages'];
+    let shareCategory = {
+        title: cat.name,
+        slug: `/category/${cat.slug}`
+    }
 
     const renderPagination = () => {
         const visiblePages = [];
@@ -65,15 +70,7 @@ export default async function Page({ params, searchParams }) {
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-lg-1">
-                            <div className="blog-details-social">
-                                <ul className="list-wrap">
-                                    <li><Link href="#"><i className="fab fa-facebook-f"></i></Link></li>
-                                    <li><Link href="#"><i className="fab fa-twitter"></i></Link></li>
-                                    <li><Link href="#"><i className="fab fa-linkedin-in"></i></Link></li>
-                                    <li><Link href="#"><i className="fab fa-behance"></i></Link></li>
-                                    <li><Link href="#"><i className="fas fa-share"></i></Link></li>
-                                </ul>
-                            </div>
+                            <SocialShare post={shareCategory} type={'vertical'} />
                         </div>
                         <div className="col-xl-8 col-lg-7">
                             <div className="blog-post-wrapper">
