@@ -68,7 +68,7 @@ export function toggleThemeMode(){
 
 export async function getPostsByFilterType(type, slug, page=1, per_page=10){
     const url        = `${process.env.NEXT_PUBLIC_API_URL}/posts?${type}=${slug}&_embed=true&orderBy=desc&per_page=${per_page}&page=${page}`;
-    const data       = await fetch(url)
+    const data       = await fetch(url, { cache:'no-store'})
     const posts      = await data.json();
     const totalPages = parseInt(data.headers.get('X-WP-TotalPages'), 10);
     return {posts, totalPages};
