@@ -108,3 +108,19 @@ export async function getInstaFeed(){
     const feed = await data.json();
     return feed.data;
 }
+
+export async function getPostById(id, order){
+    const array = [1,2,3,4,5,6,7,8,9,10];
+    const increment = order === 'nextPost' ? 1 : -1;
+    for (let i = 1; i <= array.length; i++) {
+        const adjacentPostID = id + increment * i;
+        const url  = `${process.env.NEXT_PUBLIC_API_URL}/posts/${adjacentPostID}?_embed=true`;
+        const data = await fetch(url)
+        const post = await data.json();
+        if(post.data == undefined){
+            return post;        
+        }
+    }     
+
+    return null;
+}

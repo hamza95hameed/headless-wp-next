@@ -2,7 +2,7 @@ import Breadcrumb from "@/components/Breadcrumb/Breadcrumb"
 import { SocialShare } from "@/components/SocialShare/SocialShare";
 import Link from 'next/link'
 import Image from "next/image";
-import { getThumbnail, getCategory, getAuthor, formatDate, getPostByHandle, getCategories, getInstaFeed } from '@/utils/common';
+import { getThumbnail, getCategory, getAuthor, formatDate, getPostByHandle, getCategories, getInstaFeed, getPostById  } from '@/utils/common';
 import Sidebar from '@/components/Sidebar/Sidebar'
 import { websiteSeo } from '@/utils/seo'
 import NextPrevPost from "@/components/NextPrevPost/NextPrevPost";
@@ -23,6 +23,8 @@ export default async function Page({ params }) {
 	let post       = await getPostByHandle(params.slug);
 	let categories = await getCategories();
 	let instaFeed  = await getInstaFeed();
+	let nextPost   = await getPostById(post.id, 'nextPost');
+	let prevPost   = await getPostById(post.id, 'prevPost');
 	let sharePost  = {
 		title: post.title.rendered,
 		slug: `/blog/${post.slug}`
@@ -77,13 +79,13 @@ export default async function Page({ params }) {
 										<Link href="#"><i className="far fa-check"></i><Image width={120} height={120} loading="eager" priority={true} src="/img/others/avatar.png" alt="img" /></Link>
 									</div>
 									<div className="blog-avatar-content">
-										<p>Monty Hython is a Writer at Sarsa and has been covering emerging technologies &
+										<p>{getAuthor(post).name} is a Writer at Sarsa and has been covering emerging technologies &
 											venture capital there since 2013. He covers a wide variety of news from early and late stage startups to massive tech behemoths.</p>
-										<h5 className="name">Alison Fiano</h5>
+										<h5 className="name">{getAuthor(post).name}</h5>
 										<span className="designation">OG Author</span>
 									</div>
 								</div>
-								<NextPrevPost post={post}></NextPrevPost>
+								<NextPrevPost prevPost={prevPost} nextPost={nextPost}></NextPrevPost>
 							</div>
 						</div>
 						<div className="col-xl-3 col-lg-4 col-md-6">
