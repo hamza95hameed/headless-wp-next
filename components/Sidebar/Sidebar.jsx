@@ -4,7 +4,7 @@ import Link from 'next/link'
 import SidebarPost from '../SidebarPost/SidebarPost';
 import { InstagramFeed } from '../InstagramFeed/InstagramFeed';
 
-const Sidebar = ({post, categories}) => {
+const Sidebar = ({ post, categories, instaFeed }) => {
     categories = categories.filter(category => category.name !== 'Uncategorized')
     return (
         <aside className="blog-sidebar">
@@ -28,13 +28,13 @@ const Sidebar = ({post, categories}) => {
             <div className="widget sidebar-widget widget_categories">
                 <h4 className="widget-title">Trending Category</h4>
                 <ul className="list-wrap">
-                    {categories.map((category) => (  
+                    {categories.map((category) => (
                         <li>
                             <div className="thumb"><Link href={`/category/${category.slug}`}><img src="/img/category/side_category01.jpg" alt="img" /></Link></div>
                             <Link href={`/category/${category.slug}`}>{category.name}</Link>
                             <span className="float-right">{category.count}</span>
                         </li>
-                    ))}                    
+                    ))}
                 </ul>
             </div>
             <div className="widget sidebar-widget">
@@ -53,11 +53,11 @@ const Sidebar = ({post, categories}) => {
                         </div>
                     </div>
                     <div className="sidebarInsta__slider-wrap">
-                        <InstagramFeed/>
-                        <InstagramFeed dir={'rtl'}/>
+                        <InstagramFeed instaFeed={instaFeed} start={0} />
+                        <InstagramFeed instaFeed={instaFeed} start={10} dir={'rtl'} />
                     </div>
                     <div className="sidebarInsta__bottom">
-                        <Link href="https://www.instagram.com/" target="_blank" className="btn"><i className="fab fa-instagram"></i><span className="text">Follow Me</span></Link>
+                        <Link href="https://www.instagram.com/newsparho" target="_blank" className="btn"><i className="fab fa-instagram"></i><span className="text">Follow Me</span></Link>
                     </div>
                 </div>
             </div>

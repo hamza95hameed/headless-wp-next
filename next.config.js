@@ -12,6 +12,12 @@ module.exports = {
                 port: '',
                 pathname: '/wp-content/uploads/**',
             },
+            {
+                protocol: 'https',
+                hostname: 'scontent.cdninstagram.com',
+                port: '',
+                pathname: '/v/**',
+            },
         ],
     },
 }

@@ -3,14 +3,15 @@ import React from 'react'
 import Link from 'next/link'
 import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-export const InstagramFeed = ({dir}) => {
-    const instaArr = [1,2,3,4,5,6,7,8,9,10];
+import Image from "next/image";
+
+export const InstagramFeed = ({ instaFeed, start, dir }) => {
     let classDir = '';
-    if( dir ){
+    if (dir) {
         classDir = '-2';
     }
     return (
-        <div className={`swiper-container sidebarInsta-active${classDir}`}  dir={dir}>
+        <div className={`swiper-container sidebarInsta-active${classDir}`} dir={dir}>
             <Swiper
                 autoplay={{
                     delay: 3500,
@@ -22,11 +23,11 @@ export const InstagramFeed = ({dir}) => {
                 centeredSlides={true}
                 modules={[Autoplay]}
             >
-                {instaArr.map((insta) => (
-                    <SwiperSlide key={insta}>
+                {instaFeed.slice(start, start + 10).map((insta) => (
+                    <SwiperSlide key={insta.id}>
                         <div className="swiper-slide">
-                            <Link href="https://www.instagram.com/" target="_blank"><img src="/img/instagram/side_insta01.jpg" alt="img" /></Link>
-                        </div>     
+                            <Link href={insta.permalink} target="_blank"><Image src={insta.media_url} alt={insta.caption} width={80} height={50} /></Link>
+                        </div>
                     </SwiperSlide>
                 ))}
             </Swiper>

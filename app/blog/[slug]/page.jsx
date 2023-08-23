@@ -2,9 +2,10 @@ import Breadcrumb from "@/components/Breadcrumb/Breadcrumb"
 import { SocialShare } from "@/components/SocialShare/SocialShare";
 import Link from 'next/link'
 import Image from "next/image";
-import { getThumbnail, getCategory, getAuthor, formatDate, getPostByHandle, getCategories } from '@/utils/common';
+import { getThumbnail, getCategory, getAuthor, formatDate, getPostByHandle, getCategories, getInstaFeed } from '@/utils/common';
 import Sidebar from '@/components/Sidebar/Sidebar'
 import { websiteSeo } from '@/utils/seo'
+import NextPrevPost from "@/components/NextPrevPost/NextPrevPost";
 
 export async function generateMetadata({ params, searchParams }, parent) {
 	const post = await getPostByHandle(params.slug);
@@ -21,6 +22,7 @@ export async function generateMetadata({ params, searchParams }, parent) {
 export default async function Page({ params }) {
 	let post       = await getPostByHandle(params.slug);
 	let categories = await getCategories();
+	let instaFeed  = await getInstaFeed();
 	let sharePost  = {
 		title: post.title.rendered,
 		slug: `/blog/${post.slug}`
@@ -81,36 +83,11 @@ export default async function Page({ params }) {
 										<span className="designation">OG Author</span>
 									</div>
 								</div>
-								<div className="blog-prev-next-posts">
-									<div className="row">
-										<div className="col-xl-6 col-lg-8 col-md-6">
-											<div className="pn-post-item">
-												<div className="thumb">
-													<Link href="blog-details.html"><img src="/img/lifestyle/life_style06.jpg" alt="img" /></Link>
-												</div>
-												<div className="content">
-													<span>Prev Post</span>
-													<h5 className="title tgcommon__hover"><Link href="blog-details.html">3 Stocks to Buy and Hold Through the Panic...</Link></h5>
-												</div>
-											</div>
-										</div>
-										<div className="col-xl-6 col-lg-8 col-md-6">
-											<div className="pn-post-item next-post">
-												<div className="thumb">
-													<Link href="blog-details.html"><img src="/img/lifestyle/life_style07.jpg" alt="img" /></Link>
-												</div>
-												<div className="content">
-													<span>Next Post</span>
-													<h5 className="title tgcommon__hover"><Link href="blog-details.html">Mood Boards for Product Designers dome...</Link></h5>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+								<NextPrevPost post={post}></NextPrevPost>
 							</div>
 						</div>
 						<div className="col-xl-3 col-lg-4 col-md-6">
-							<Sidebar post={post} categories={categories}></Sidebar>
+							<Sidebar post={post} categories={categories} instaFeed={instaFeed}></Sidebar>
 						</div>
 					</div>
 				</div>

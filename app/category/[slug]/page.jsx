@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Image from "next/image";
 import Breadcrumb from '@/components/Breadcrumb/Breadcrumb'
 import { SocialShare } from "@/components/SocialShare/SocialShare";
-import { getThumbnail, getCategory, getAuthor, formatDate, getPostsByFilterType, getCategories, getCategoryByHandle } from '@/utils/common';
+import { getThumbnail, getCategory, getAuthor, formatDate, getPostsByFilterType, getCategories, getCategoryByHandle, getInstaFeed } from '@/utils/common';
 import Sidebar from '@/components/Sidebar/Sidebar';
 import { websiteSeo } from '@/utils/seo'
 
@@ -20,6 +20,7 @@ export async function generateMetadata({ params, searchParams }, parent) {
 
 export default async function Page({ params, searchParams }) {
     let currentPage   = searchParams.page || 1;
+    let instaFeed     = await getInstaFeed();
     let categories    = await getCategories();
     let cat           = categories.find((category) => category.slug === params.slug)
     let data          = await getPostsByFilterType('categories', cat.id, currentPage, 10);
@@ -109,7 +110,7 @@ export default async function Page({ params, searchParams }) {
                             </div>
                         </div>
                         <div className="col-xl-3 col-lg-4 col-md-6">
-                        <Sidebar post={posts[0]} categories={categories}></Sidebar>
+                        <Sidebar post={posts[0]} categories={categories} instaFeed={instaFeed}></Sidebar>
                         </div>
                     </div>
                 </div>
