@@ -85,7 +85,7 @@ export default async function Page({ params }) {
 										<span className="designation">OG Author</span>
 									</div>
 								</div>
-								<NextPrevPost prevPost={prevPost} nextPost={nextPost}></NextPrevPost>
+								{/* <NextPrevPost prevPost={prevPost} nextPost={nextPost}></NextPrevPost> */}
 							</div>
 						</div>
 						<div className="col-xl-3 col-lg-4 col-md-6">
